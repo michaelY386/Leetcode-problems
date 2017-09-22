@@ -1,0 +1,196 @@
+C++
+
+* vector<int>& nums1
+
+struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+
+* struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+
+ vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false)); 初始化有变量定义大小的vector
+
+Q34 Search for a Range
+	Binary search
+
+Q19 Remove Nth Node from end of list
+	List Operand
+
+	ListNode *xp = head;
+	ListNode *a = new ListNode(head->val);
+    ListNode *b = a;
+    a->next = new ListNode(head->val);    
+    a = a->next;    right;
+
+    a->val=......(null pointer)  wrong!!!
+
+Q22 Generate Parentheses
+	recursion
+	变量都作为传递变量递归回溯
+
+	或 s.substr(int, int)截取字符串
+
+Q67 Add Binary
+
+	单位字符转整形 c－'0'
+	单位整形转字符 d + '0'
+	st = c + st 字符则夹在字符串前
+	二进制加法：异或^
+
+Q69 MySqrt
+	注意处理乘法边界int越界
+	(i+1)*(i+1)<i*i
+
+Q83 Remove Duplicates from Sorted List
+	考虑最后一个元素的特殊情况
+	注意不要死循环 指针要往下走
+	注意不要访问空指针
+
+Q88 Merge Sorted Array
+	由于总长度知道 从大往小排 免去移位
+
+
+Q32 Longest Valid Parentheses
+	stack or dp
+
+Q1 Two Sum
+
+
+Q8 String to Integer(atoi)
+
+
+Q5 Longest Palindromic Substring 
+
+
+Q15 3Sum
+	i+two pointer
+	去除重复的数，即某一位置不重复使用同一个数!三个数中可以有重复，保证index:i<l<r
+
+
+Q16 3Sum Closest
+	sort(nums.begin(), nums.end()) 排序
+	reverse(a.begin(), b.begin()) 倒过来
+	按0～size－1循环  利用two pointer实现O(n)
+	具体实现过程与3Sum类似
+
+
+Q104 int maxDepth(TreeNode* root) {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        int count = 0;
+        int result = 0;
+        
+        while(!q.empty()) 
+        {
+            count = q.size();
+            result++;
+            for(int i = 0; i < count; i++)
+            {
+                TreeNode* temp = q.front();
+                //cout<<temp->val<<endl;
+                if(temp->left!=NULL)
+                {
+                    q.push(temp->left);
+                }
+                if(temp->right!=NULL)
+                {
+                    q.push(temp->right);
+                }
+                q.pop();
+            }
+            
+        }
+    宽搜代码
+
+    int maxDepth(TreeNode* root) {
+        if (root == NULL)
+            return 0;
+        
+        int l = maxDepth(root->left);
+        int r = maxDepth(root->right);
+        return (max(l, r) + 1);
+    }
+
+
+Q23 Merge K Sorted List
+ 	实现归并两个List的函数
+
+Q21
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* ans = new ListNode(0);
+        ListNode* walk = ans;
+        
+        if (!l1) return l2;
+        if (!l2) return l1;
+        
+        while (l1 && l2) {
+            if (l1->val > l2->val) {
+                walk->next = new ListNode(l2->val);
+                l2 = l2->next;
+            }
+            else {
+                walk->next = new ListNode(l1->val);
+                l1 = l1->next;
+            }
+            walk = walk->next;
+        }
+        
+        if (!l1 && l2) walk->next = l2;
+        else if (l1 && !l2) walk->next = l1;
+        
+        return ans->next;
+        
+    }
+}; 
+链表操作
+
+Q112
+	叶子节点的判定： 没有左右子
+
+Q118 Pascal's Triangle
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> res;
+        for(int i=0; i<numRows; i++) {
+            res.push_back(vector<int>(i+1));
+            res[i][0] = 1;
+            res[i][i] = 1;
+        }
+        for(int i=2; i<numRows; i++) {
+            for(int j=1; j<i; j++) {
+                res[i][j] = res[i-1][j-1] + res[i-1][j];
+            }
+        }        
+        return res;
+    }
+};
+访问二维向量的方法	
+
+Q10 Regular Expression Matching
+
+Q10 Q44
+recursion
+分情况 注意理解匹配的边界条件
+	Q44 dp
+	dp基本步骤：
+	分情况， 动态方程， 边界基本情况， 递推
+	&&优先级比||高！
+
+
+
